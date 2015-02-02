@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :news
+
   resources :members
 
   root 'static_pages#home'
