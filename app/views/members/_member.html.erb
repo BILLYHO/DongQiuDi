@@ -7,7 +7,7 @@
   <td><%= member.about %></td>
   <td><%= member.motto %></td>
 
-  <td><%= image_tag if member.avatar ?  member.avatar : "http://7u2tjq.com1.z0.glb.clouddn.com/default.jpg" %></td>
+  <td><%= image_tag member.avatar ? (member.avatar) : ("http://7u2tjq.com1.z0.glb.clouddn.com/default.jpg") %></td>
   <td><%= link_to 'Show', member %></td>
   <td><%= link_to 'Edit', edit_member_path(member) %></td>
   <td><%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
