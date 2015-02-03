@@ -11,35 +11,34 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label "Member ID" %><br>
-    <%= f.text_area :member_id %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_area :name %>
-  </div>
-  <div class="field">
-    <%= f.label :gender %><br>
-    <%= f.text_area :gender %>
-  </div>
-  <div class="field">
-    <%= f.label :position %><br>
-    <%= f.text_area :position %>
-  </div>
-  <div class="field">
-    <%= f.label :about %><br>
-    <%= f.text_area :about %>
-  </div>
-  <div class="field">
-    <%= f.label :motto %><br>
-    <%= f.text_area :motto %>
-  </div>
-  <div class="avatar">
-    <%= f.label :avatar %><br>
-    <%= f.text_area :avatar %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+  <form>
+    <div class="row">
+    <div class="form-group col-md-6 col-md-offset-3">
+      <%= f.label "Member ID" %><br>
+      <%= f.text_field :member_id,class:"form-control" %><br>
+
+      <%= f.label :name %><br>
+      <%= f.text_field :name,class:"form-control"%><br>
+
+      <%= f.label :gender %><br>
+      <%= f.select(:gender, options_for_select([["男", "男"], ["女", "女"], ["其他", "其他"]], 3), {}, {class:"form-control"})%><br>
+
+      <%= f.label :position %><br>
+      <%= f.select(:position, options_for_select([["前锋", "前峰"], ["中场", "中场"], ["后卫", "后卫"], ["门将", "门将"], ["后勤", "后勤"], ["退役", "退役"]], 6), {}, {class:"form-control"})%><br>
+
+      <%= f.label :about %><br>
+      <%= f.text_area :about,class:"form-control" %><br>
+
+      <%= f.label :motto %><br>
+      <%= f.text_area :motto,class:"form-control" %><br>
+
+      <%= f.label :avatar %><br>
+      <%= f.url_field :avatar,class:"form-control" %><br>
+
+      <%= f.submit "Submit", class:"btn btn-primary"%>
+    </div>
+    </div>
+  </form>
+
 <% end %>
