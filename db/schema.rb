@@ -14,15 +14,15 @@
 ActiveRecord::Schema.define(version: 20150202085317) do
 
   create_table "members", force: true do |t|
-    t.integer  "member_id"
+    t.text     "member_id"
     t.text     "name"
     t.text     "gender"
     t.text     "position"
     t.text     "about"
     t.text     "motto"
+    t.string   "avatar"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "avatar"
   end
 
   add_index "members", ["member_id"], name: "index_members_on_member_id"
