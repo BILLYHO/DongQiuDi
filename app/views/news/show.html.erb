@@ -11,6 +11,11 @@
 </div>
 </div>
 
+<div class="row">
+  <div class="btn-group col-md-offset-1 col-sm-6 col-sm-offset-0 col-xs-10 col-xs-offset-1">
+    <%= link_to 'Back', news_index_path, :class => " btn btn-default"%>
+    <%= link_to 'Edit', edit_news_path(@news), :class => " btn btn-default"%>
+    <%= link_to 'Destroy', @news, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger", :style => 'color: #FFFFFF'%>
+  </div>
+</div>
 
-<%= link_to 'Edit', edit_news_path(@news) %> |
-<%= link_to 'Back', news_index_path %>
