@@ -18,7 +18,7 @@
         <%= f.text_field :topic_id,class:"form-control" %><br>
 
         <%= f.label :topic_type %><br>
-        <%= f.select(:topic_type, options_for_select([["战报", 1], ["活动", 2], ["专访", 3], ["公告", 4], ["其他", 5]], 5), {}, {class:"form-control"})%><br>
+        <%= f.select(:topic_type, options_for_select([["1-战报", 1], ["2-活动", 2], ["3-专访", 3], ["4-公告", 4], ["5-其他", 5]], 5), {}, {class:"form-control"})%><br>
 
         <%= f.label :time %><br>
         <%= f.date_select :time, {}, {:class => 'date-select'} %><br><br>

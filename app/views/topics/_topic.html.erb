@@ -1,0 +1,7 @@
+<div class="col-md-10 col-md-offset-1">
+  <div class="well"><%= link_to(topic) do %>
+        <h3><%= topic.title %><small><%= topic.time.to_s %></small></h3>
+    <% end %>
+        <%= truncate(topic.content, :length => 300) %>
+    </div>
+</div>
