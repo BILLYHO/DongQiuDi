@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Topic.create(topic_id: "123", topic_type:1, time: Date.new(2012,02,28), title: "test", content: "sss")
-50.time do
+50.times do
   Topic.create(topic_id: "10001", topic_type:1, time: Date.new(2012,04,01), title: "test", content: "中东足协电 北京时间2012年3月30日星期五13:00 在中山大学东校区西足球场进行了一场精彩激烈的足球比赛！比赛双方分别是软件学院和资管学院！经过下上半场各25分钟的激烈碰撞，最终身穿黑白间条球衣的软件学院和身披深色球衣的资管学院1:1握手言和！")
 end
 
