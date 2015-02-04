@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20150202085317) do
 
   create_table "news", force: true do |t|
     t.text     "news_id"
-    t.text     "time"
+    t.date     "time"
     t.text     "title"
     t.text     "content"
     t.datetime "created_at"

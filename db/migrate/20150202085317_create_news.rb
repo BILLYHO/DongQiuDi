@@ -2,7 +2,7 @@ class CreateNews < ActiveRecord::Migration
   def change
     create_table :news do |t|
       t.text :news_id
-      t.text :time
+      t.date :time
       t.text :title
       t.text :content
 
