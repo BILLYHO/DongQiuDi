@@ -1,0 +1,36 @@
+<%= form_for(@topic) do |f| %>
+  <% if @topic.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@topic.errors.count, "error") %> prohibited this topic from being saved:</h2>
+
+      <ul>
+      <% @topic.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <form>
+    <div class="row">
+      <div class="form-group col-md-6 col-md-offset-3">
+        <%= f.label "Topic ID" %><br>
+        <%= f.text_field :topic_id,class:"form-control" %><br>
+
+        <%= f.label :topic_type %><br>
+        <%= f.select(:topic_type, options_for_select([["战报", 1], ["活动", 2], ["专访", 3], ["公告", 4], ["其他", 5]], 5), {}, {class:"form-control"})%><br>
+
+        <%= f.label :time %><br>
+        <%= f.date_select :time, {}, {:class => 'date-select'} %><br><br>
+
+        <%= f.label :title %><br>
+        <%= f.text_field :title,class:"form-control" %><br>
+
+        <%= f.label :content %><br>
+        <%= f.text_area :content,class:"form-control", :rows => "10" %><br>
+
+        <%= f.submit "Submit", class:"btn btn-primary"%>
+      </div>
+    </div>
+    </form>
+<% end %>

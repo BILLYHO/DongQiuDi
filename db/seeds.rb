@@ -5,7 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-News.create(news_id: "123", time: Date.new(2011,12,22), title: "test", content: "sss")
+
+Topic.create(topic_id: "123", topic_type:1, time: Date.new(2012,02,28), title: "test", content: "sss")
+
 
 
 Member.create(member_id: "08001", name: "周瑞璟", gender: "男", position: "中场", about: "周瑞璟，中山大学软件学院08级软件工程（数字媒体），有中东传奇、中东球王之称，可见其球技非同一般，在2012年中东足协举办的 第七届院系杯的决赛中，连过三人进球绝杀对手，为HWFC夺得冠军！", motto: "none", avatar: "http://7u2tjq.com1.z0.glb.clouddn.com/08001.jpg")
