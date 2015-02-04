@@ -1,24 +1,16 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>News:</strong>
-  <%= @news.news_id %>
-</p>
+<div class="page-header">
+  <h1><%= @news.title %></h1>
+  <div class="center"><%= @news.time.to_s %></div>
+</div>
 
-<p>
-  <strong>Time:</strong>
-  <%= @news.time %>
-</p>
+<div class="row">
+<div class="well col-md-10 col-md-offset-1">
+  <%= render html: @news.content.gsub(/\n/, '<br>').html_safe %>
+</div>
+</div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @news.title %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @news.content %>
-</p>
 
 <%= link_to 'Edit', edit_news_path(@news) %> |
 <%= link_to 'Back', news_index_path %>
