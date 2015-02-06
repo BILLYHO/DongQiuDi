@@ -1,6 +1,6 @@
 class MembersController < ApplicationController
   before_action :set_member, only: [:show, :edit, :update, :destroy]
-
+  before_action :logged_in_user, only: [:edit, :update]
   # GET /members
   # GET /members.json
   def index
@@ -71,4 +71,6 @@ class MembersController < ApplicationController
     def member_params
       params.require(:member).permit(:member_id, :name, :gender, :position, :about, :motto, :avatar)
     end
+
+
 end

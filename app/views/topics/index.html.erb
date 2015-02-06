@@ -12,7 +12,10 @@
   <%= will_paginate @topics %>
 <% end %>
 
-<div class="col-md-offset-1">
-  <%= link_to 'New Topic', new_topic_path %>
-</div>
+<% if logged_in? %>
+    <div class="col-md-offset-1">
+      <%= link_to 'New Topic', new_topic_path %>
+    </div>
+<% end %>
+
 

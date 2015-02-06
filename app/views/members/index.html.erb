@@ -9,4 +9,7 @@
 <% end %>
 <br>
 
-<%= link_to 'New Member', new_member_path %>
+<% if logged_in? %>
+  <%= link_to 'New Member', new_member_path %>
+<% end %>
+

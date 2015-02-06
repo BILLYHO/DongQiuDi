@@ -60,9 +60,12 @@
 <br>
 <div class="row">
   <div class="btn-group col-md-offset-1 col-sm-6 col-sm-offset-0 col-xs-10 col-xs-offset-1">
+
     <%= link_to 'Back', members_path, :class => " btn btn-default"%>
-    <%= link_to 'Edit', edit_member_path(@member), :class => " btn btn-default"%>
-    <%= link_to 'Destroy', @member, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger", :style => 'color: #FFFFFF'%>
+    <% if logged_in? %>
+        <%= link_to 'Edit', edit_member_path(@member), :class => " btn btn-default"%>
+        <%= link_to 'Destroy', @member, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger", :style => 'color: #FFFFFF'%>
+    <% end %>
   </div>
 </div>
 
