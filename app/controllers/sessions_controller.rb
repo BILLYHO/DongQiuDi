@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       log_in user
       redirect_to root_url
+      flash[:success] = 'Login success!'
     else
       flash[:danger] = 'Invalid email/password combination' # Not quite right!
       render 'new'
