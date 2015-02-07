@@ -35,10 +35,7 @@ class TopicsController < ApplicationController
         end
         format.json { render :show, status: :created, location: @topic }
       else
-        format.html do
-          render :new
-          flash[:danger] = 'Create error.'
-        end
+        format.html { render :new }
         format.json { render json: @topic.errors, status: :unprocessable_entity }
       end
     end
@@ -55,10 +52,7 @@ class TopicsController < ApplicationController
         end
         format.json { render :show, status: :ok, location: @topic }
       else
-        format.html do
-          render :edit
-          flash[:danger] = 'Update error.'
-        end
+        format.html {render :edit}
         format.json { render json: @topic.errors, status: :unprocessable_entity }
       end
     end
