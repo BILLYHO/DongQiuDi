@@ -29,10 +29,16 @@ class TopicsController < ApplicationController
 
     respond_to do |format|
       if @topic.save
-        format.html { redirect_to @topic, notice: 'Topic was successfully created.' }
+        format.html do
+          redirect_to @topic
+          flash[:success] = 'Topic was successfully created.'
+        end
         format.json { render :show, status: :created, location: @topic }
       else
-        format.html { render :new }
+        format.html do
+          render :new
+          flash[:danger] = 'Create error.'
+        end
         format.json { render json: @topic.errors, status: :unprocessable_entity }
       end
     end
@@ -43,10 +49,16 @@ class TopicsController < ApplicationController
   def update
     respond_to do |format|
       if @topic.update(topic_params)
-        format.html { redirect_to @topic, notice: 'Topic was successfully updated.' }
+        format.html do
+          redirect_to @topic
+          flash[:success] = 'Topic was successfully updated.'
+        end
         format.json { render :show, status: :ok, location: @topic }
       else
-        format.html { render :edit }
+        format.html do
+          render :edit
+          flash[:danger] = 'Update error.'
+        end
         format.json { render json: @topic.errors, status: :unprocessable_entity }
       end
     end
@@ -57,7 +69,10 @@ class TopicsController < ApplicationController
   def destroy
     @topic.destroy
     respond_to do |format|
-      format.html { redirect_to topics_url, notice: 'Topic was successfully destroyed.' }
+      format.html do
+        redirect_to topics_url
+        flash[:success] = 'Topic was successfully destroyed.'
+      end
       format.json { head :no_content }
     end
   end
