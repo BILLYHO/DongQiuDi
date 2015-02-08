@@ -9,7 +9,7 @@
 <% end %>
 <br>
 
-<% if logged_in? %>
+<% if is_admin? %>
   <%= link_to 'New Member', new_member_path %>
 <% end %>
 
