@@ -5,7 +5,9 @@ class SessionsController < ApplicationController
   end
 
   def weibo
-    flash[:notice] = request.original_url.to_s
+    u = URI.parse(request.original_url)
+    p = CGI.parse(u.query)
+    flash[:notice] = p['code'].first
   end
 
   def create
