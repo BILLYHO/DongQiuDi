@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
-  get    'weibo'  => 'sessions#weibo'
+  post    'weibo'  => 'sessions#weibo'
   get    'oauth' => 'sessions#oauth'
 
   resources :topics
