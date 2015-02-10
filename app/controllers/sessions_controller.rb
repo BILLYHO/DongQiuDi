@@ -29,13 +29,11 @@ class SessionsController < ApplicationController
     obj = JSON.parse(resp.body)
 
     uri = URI.parse("https://api.weibo.com/2/users/show.json?access_token=#{obj['access_token']}&uid=#{obj['uid']}")
-    http = Net::HTTP.new(uri.host, uri.port)
-    request = Net::HTTP::Get.new(uri.request_uri)
-    response = http.request(request)
+    response = Net::HTTP.get_response(uri)
 
     result = JSON.parse(response.body)
 
-    flash[:success] = obj['name']
+    flash[:success] = result['name']
     # user = User.find_by(email: "#{obj['uid']}@weibo.com".downcase)
     # if !user
     #   user = User.create(name: obj['uid'], email:"#{obj['uid']}@weibo.com".downcase, password: obj['access_token'], password_confirmation: obj['access_token'], weibo_token: obj['access_token'], weibo_uid: obj['uid'])
