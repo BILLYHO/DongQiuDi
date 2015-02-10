@@ -45,8 +45,8 @@ class SessionsController < ApplicationController
                          weibo_avatar_large: image_large, weibo_avatar_hd: image_hd)
     else
       flash[:info] = "Token updated"
-      user.update_attributes(:weibo_token, token,weibo_avatar_small: image_small,
-                            weibo_avatar_large: image_large, weibo_avatar_hd: image_hd)
+      user.update_attributes(:weibo_token => token, :weibo_avatar_small => image_small,
+                            :weibo_avatar_large => image_large, :weibo_avatar_hd => image_hd)
     end
     log_in user
     flash[:success] = "Login success! Hello #{user_name}!"
