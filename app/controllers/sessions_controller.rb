@@ -33,18 +33,24 @@ class SessionsController < ApplicationController
     result = JSON.parse(response.body)
     user_name =  result['name']
     user_email = "#{uid}@weibo.com".downcase
+    image_small = result['profile_image_url'] #50*50
+    image_large = result['avatar_large'] #180*180
+    image_hd = result['avatar_hd'] #origin size
 
     user = User.find_by(email: user_email)
     if !user
-      user = User.create(name: user_name, email:user_email, password: token, password_confirmation: token, weibo_token: token, weibo_uid: uid)
+      flash[:info] = 'User created'
+      user = User.create(name: user_name, email:user_email, password: token, password_confirmation: token,
+                         weibo_token: token, weibo_uid: uid, weibo_avatar_small: image_small,
+                         weibo_avatar_large: image_large, weibo_avatar_hd: image_hd)
+    else
+      flash[:info] = "Token updated"
+      user.update_attribute(:weibo_token, token,weibo_avatar_small: image_small,
+                            weibo_avatar_large: image_large, weibo_avatar_hd: image_hd)
     end
     log_in user
-    flash[:success] = "Login success! Hello #{user_name}"
+    flash[:success] = "Login success! Hello #{user_name}!"
     redirect_to root_url
-  end
-
-  def oauth
-    #flash[:notice] = request.original_url
   end
 
   def create
