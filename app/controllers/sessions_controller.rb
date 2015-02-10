@@ -9,13 +9,7 @@ class SessionsController < ApplicationController
     p = CGI.parse(u.query)
     flash[:notice] = p['code'].first
     session[:code] = p['code'].first
-    get_token(p['code'].first)
-    #redirect_to "https://api.weibo.com/oauth2/access_token?client_id=3741023176&client_secret=1d9a681ae216b72f2baa31a03390777c&grant_type=authorization_code&redirect_uri=http://dongqiudi.herokuapp.com/oauth&code=#{p['code'].first}"
-  end
 
-
-  def get_token(code)
-    flash[:notice] = 'getting token'
     require 'net/http'
     require "uri"
     # get the url that we need to post to
@@ -26,12 +20,12 @@ class SessionsController < ApplicationController
     post_args['client_secret'] = '1d9a681ae216b72f2baa31a03390777c'
     post_args['grant_type'] = 'authorization_code'
     post_args['redirect_uri'] = 'http://dongqiudi.herokuapp.com/oauth'
-    post_args['code'] = code
+    post_args['code'] = p['code'].first
 
     # send the request
     resp = Net::HTTP.post_form(url, post_args)
     puts res.body
-    #redirect_to oauth
+    #redirect_to "https://api.weibo.com/oauth2/access_token?client_id=3741023176&client_secret=1d9a681ae216b72f2baa31a03390777c&grant_type=authorization_code&redirect_uri=http://dongqiudi.herokuapp.com/oauth&code=#{p['code'].first}"
   end
 
   def oauth
