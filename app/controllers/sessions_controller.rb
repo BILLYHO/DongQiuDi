@@ -31,7 +31,6 @@ class SessionsController < ApplicationController
     uri = URI.parse("https://api.weibo.com/2/users/show.json?access_token=#{obj['access_token']}&uid=#{obj['uid']}")
     http = Net::HTTP.new(uri.host, uri.port)
     request = Net::HTTP::Get.new(uri.request_uri)
-    request.basic_auth("username", "password")
     response = http.request(request)
 
     result = JSON.parse(response.body)
