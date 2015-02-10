@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
 
     # send the request
     resp = Net::HTTP.post_form(url, post_args)
-    # puts res.body
+    puts res.body
     #redirect_to "https://api.weibo.com/oauth2/access_token?client_id=3741023176&client_secret=1d9a681ae216b72f2baa31a03390777c&grant_type=authorization_code&redirect_uri=http://dongqiudi.herokuapp.com/oauth&code=#{p['code'].first}"
   end
 
