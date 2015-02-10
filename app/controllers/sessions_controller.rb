@@ -20,27 +20,35 @@ class SessionsController < ApplicationController
     post_args['client_id'] = '3741023176'
     post_args['client_secret'] = '1d9a681ae216b72f2baa31a03390777c'
     post_args['grant_type'] = 'authorization_code'
-    post_args['redirect_uri'] = 'http://dongqiudi.herokuapp.com/oauth'
+    post_args['redirect_uri'] = 'http://dongqiudi.herokuapp.com/weibo'
     post_args['code'] = p['code'].first
 
     # send the request
     resp = Net::HTTP.post_form(url, post_args)
     #puts resp.body
     obj = JSON.parse(resp.body)
-    flash[:success] = obj['access_token']
-    flash[:success] = obj['uid']
-    user = User.find_by(email: "#{obj['uid']}@weibo.com".downcase)
-    if !user
-      user = User.create(name: obj['uid'], email:"#{obj['uid']}@weibo.com".downcase, password: obj['access_token'], password_confirmation: obj['access_token'], weibo_token: obj['access_token'], weibo_uid: obj['uid'])
-    end
-    log_in user
-    redirect_to oauth
+
+    uri = URI.parse("https://api.weibo.com/2/users/show.json?access_token=#{obj['access_token']}&uid=#{obj['uid']}")
+    http = Net::HTTP.new(uri.host, uri.port)
+    request = Net::HTTP::Get.new(uri.request_uri)
+    request.basic_auth("username", "password")
+    response = http.request(request)
+
+    result = JSON.parse(response.body)
+
+    flash[:success] = obj['name']
+    # user = User.find_by(email: "#{obj['uid']}@weibo.com".downcase)
+    # if !user
+    #   user = User.create(name: obj['uid'], email:"#{obj['uid']}@weibo.com".downcase, password: obj['access_token'], password_confirmation: obj['access_token'], weibo_token: obj['access_token'], weibo_uid: obj['uid'])
+    # end
+    # log_in user
+    # redirect_to oauth
     #flash[:success] = resp.body.to_s
     #redirect_to "https://api.weibo.com/oauth2/access_token?client_id=3741023176&client_secret=1d9a681ae216b72f2baa31a03390777c&grant_type=authorization_code&redirect_uri=http://dongqiudi.herokuapp.com/oauth&code=#{p['code'].first}"
   end
 
   def oauth
-    flash[:notice] = request.original_url
+    #flash[:notice] = request.original_url
   end
 
   def create
