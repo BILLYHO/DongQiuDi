@@ -9,7 +9,23 @@ class SessionsController < ApplicationController
     p = CGI.parse(u.query)
     flash[:notice] = p['code'].first
     session[:code] = p['code'].first
-    redirect_to "https://api.weibo.com/oauth2/access_token?client_id=3741023176&client_secret=1d9a681ae216b72f2baa31a03390777c&grant_type=authorization_code&redirect_uri=http://dongqiudi.herokuapp.com/weibo&code=#{p['code'].first}"
+    get_token(p['code'].first)
+    #redirect_to "https://api.weibo.com/oauth2/access_token?client_id=3741023176&client_secret=1d9a681ae216b72f2baa31a03390777c&grant_type=authorization_code&redirect_uri=http://dongqiudi.herokuapp.com/weibo&code=#{p['code'].first}"
+  end
+
+
+  def get_token(code)
+    require 'net/http'
+    # get the url that we need to post to
+    url = URI.parse('https://api.weibo.com/oauth2/access_token')
+    # build the params string
+    post_args = { 'client_id' => '3741023176',
+                  'client_secret' => '1d9a681ae216b72f2baa31a03390777c',
+                  'grant_type' => 'authorization_code',
+                  'redirect_uri' => 'http://dongqiudi.herokuapp.com/oauth',
+                  'code' => code}
+    # send the request
+    resp, data = Net::HTTP.post_form(url, post_args)
   end
 
   def oauth
