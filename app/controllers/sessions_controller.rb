@@ -7,41 +7,40 @@ class SessionsController < ApplicationController
   end
 
   def weibo
+    #get code from weibo
     u = URI.parse(request.original_url)
     p = CGI.parse(u.query)
-    flash[:notice] = p['code'].first
-    session[:code] = p['code'].first
+    code = p['code'].first
 
-
-    # get the url that we need to post to
+    # get access token with code
     url = URI.parse("https://api.weibo.com/oauth2/access_token")
-    # build the params string
+
     post_args = {}
     post_args['client_id'] = '3741023176'
     post_args['client_secret'] = '1d9a681ae216b72f2baa31a03390777c'
     post_args['grant_type'] = 'authorization_code'
     post_args['redirect_uri'] = 'http://dongqiudi.herokuapp.com/weibo'
-    post_args['code'] = p['code'].first
+    post_args['code'] = code
 
-    # send the request
     resp = Net::HTTP.post_form(url, post_args)
-    #puts resp.body
     obj = JSON.parse(resp.body)
+    token = obj['access_token']
+    uid = obj['uid']
 
-    uri = URI.parse("https://api.weibo.com/2/users/show.json?access_token=#{obj['access_token']}&uid=#{obj['uid']}")
+    #get user info with access token
+    uri = URI.parse("https://api.weibo.com/2/users/show.json?access_token=#{token}&uid=#{uid}")
     response = Net::HTTP.get_response(uri)
-
     result = JSON.parse(response.body)
+    user_name =  result['name']
+    user_email = "#{uid}@weibo.com".downcase
 
-    flash[:success] = result['name']
-    user = User.find_by(email: "#{obj['uid']}@weibo.com".downcase)
+    user = User.find_by(email: user_email)
     if !user
-      user = User.create(name: result['name'], email:"#{obj['uid']}@weibo.com".downcase, password: obj['access_token'], password_confirmation: obj['access_token'], weibo_token: obj['access_token'], weibo_uid: obj['uid'])
+      user = User.create(name: user_name, email:user_email, password: token, password_confirmation: token, weibo_token: token, weibo_uid: uid)
     end
     log_in user
+    flash[:success] = "Login success! Hello #{user_name}"
     redirect_to root_url
-    #flash[:success] = resp.body.to_s
-    #redirect_to "https://api.weibo.com/oauth2/access_token?client_id=3741023176&client_secret=1d9a681ae216b72f2baa31a03390777c&grant_type=authorization_code&redirect_uri=http://dongqiudi.herokuapp.com/oauth&code=#{p['code'].first}"
   end
 
   def oauth
