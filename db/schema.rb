@@ -43,6 +43,8 @@ ActiveRecord::Schema.define(version: 20150206080413) do
     t.string   "name"
     t.string   "email"
     t.string   "password_digest"
+    t.string   "weibo_token"
+    t.string   "weibo_uid"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

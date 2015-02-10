@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
-
+  require 'net/http'
+  require "uri"
+  require 'json'
 
   def new
   end
@@ -10,9 +12,7 @@ class SessionsController < ApplicationController
     flash[:notice] = p['code'].first
     session[:code] = p['code'].first
 
-    #require 'rest_client'
-    require 'net/http'
-    require "uri"
+
     # get the url that we need to post to
     url = URI.parse("https://api.weibo.com/oauth2/access_token")
     # build the params string
@@ -25,8 +25,17 @@ class SessionsController < ApplicationController
 
     # send the request
     resp = Net::HTTP.post_form(url, post_args)
-    puts resp.body
-    flash[:success] = resp.body.to_s
+    #puts resp.body
+    obj = JSON.parse(resp.body)
+    session[:token] = obj['access_token']
+    session[:uid] = obj['uid']
+    user = User.find_by(email: "#{obj['uid']}@weibo.com".downcase)
+    if !user
+      user = User.create(name: obj['uid'], email:"#{obj['uid']}@weibo.com".downcase, password: obj['access_token'], password_confirmation: obj['access_token'], weibo_token: obj['access_token'], weibo_uid: obj['uid'])
+    end
+    log_in user
+    redirect_to oauth
+    #flash[:success] = resp.body.to_s
     #redirect_to "https://api.weibo.com/oauth2/access_token?client_id=3741023176&client_secret=1d9a681ae216b72f2baa31a03390777c&grant_type=authorization_code&redirect_uri=http://dongqiudi.herokuapp.com/oauth&code=#{p['code'].first}"
   end
 
