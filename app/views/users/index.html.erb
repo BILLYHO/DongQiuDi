@@ -1,0 +1,13 @@
+<h1>Listing users</h1>
+
+
+<% if @users.any? %>
+    <div class="col-md-offset-1">
+      <h3>Topics (<%= @users.count %>)</h3>
+    </div>
+
+    <div class="row">
+      <%= render @users %>
+    </div>
+    <%= will_paginate @users %>
+<% end %>

@@ -7,6 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 User.create(name: "admin", email:"admin@dongqiudi.com", password: "dongqiudi", password_confirmation: "dongqiudi")
+User.create(name: "俊俊爱执信", email: "1774357363@weibo.com", password: "2.00J6BFwBUBxKFEfa0c968587In_crD", password_confirmation: "2.00J6BFwBUBxKFEfa0c968587In_crD", weibo_token: "2.00J6BFwBUBxKFEfa0c968587In_crD", weibo_uid: "1774357363", weibo_avatar_small: "http://tp4.sinaimg.cn/1774357363/50/5666005758/1", weibo_avatar_large: "http://tp4.sinaimg.cn/1774357363/180/5666005758/1", weibo_avatar_hd: "http://tp4.sinaimg.cn/1774357363/180/5666005758/1")
 
 Topic.create(topic_id: "123", topic_type:1, time: Date.new(2012,02,28), title: "test", content: "sss")
 50.times do

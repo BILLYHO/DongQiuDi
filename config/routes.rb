@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
 
+
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
   get    'weibo'  => 'sessions#weibo'
   get    'oauth' => 'sessions#oauth'
 
+  resources :users
   resources :topics
-
   resources :members
 
   root 'static_pages#home'
