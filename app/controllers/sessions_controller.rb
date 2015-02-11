@@ -24,6 +24,7 @@ class SessionsController < ApplicationController
 
     resp = Net::HTTP.post_form(url, post_args)
     obj = JSON.parse(resp.body)
+    puts obj
     token = obj['access_token']
     uid = obj['uid']
 
@@ -31,6 +32,7 @@ class SessionsController < ApplicationController
     uri = URI.parse("https://api.weibo.com/2/users/show.json?access_token=#{token}&uid=#{uid}")
     response = Net::HTTP.get_response(uri)
     result = JSON.parse(response.body)
+    puts result
     user_name =  result['name']
     user_email = "#{uid}@weibo.com".downcase
     image_small = result['profile_image_url'] #50*50
@@ -39,12 +41,12 @@ class SessionsController < ApplicationController
 
     user = User.find_by(email: user_email)
     if !user
-      flash[:info] = 'User created'
+      flash[:notice] = 'User created'
       user = User.create(name: user_name, email:user_email, password: token, password_confirmation: token,
                          weibo_token: token, weibo_uid: uid, weibo_avatar_small: image_small,
                          weibo_avatar_large: image_large, weibo_avatar_hd: image_hd)
     else
-      flash[:info] = "Token updated"
+      flash[:notice] = "Token updated"
       user.update_attributes(:weibo_token => token, :weibo_avatar_small => image_small,
                             :weibo_avatar_large => image_large, :weibo_avatar_hd => image_hd)
     end

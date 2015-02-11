@@ -15,6 +15,6 @@
     <% end %>
 
     <p>New user? <%= link_to "Sign up now!", "#" %></p>
-    <p><%= link_to "weibo", "https://api.weibo.com/oauth2/authorize?client_id=3741023176&response_type=code&redirect_uri=http://dongqiudi.herokuapp.com/weibo" %> </p>
+    <%= link_to "微博登录", "https://api.weibo.com/oauth2/authorize?client_id=3741023176&response_type=code&redirect_uri=http://dongqiudi.herokuapp.com/weibo", :class => "btn btn-primary"%>
   </div>
 </div>
