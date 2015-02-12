@@ -2,7 +2,7 @@ module SessionsHelper
   # Logs in the given user.
   def log_in(user)
     session[:user_id] = user.id
-    session[:user_email] = user.email
+    session[:admin] = user.admin
   end
 
   # Returns the current logged-in user (if any).
@@ -15,7 +15,7 @@ module SessionsHelper
   end
 
   def is_admin?
-    session[:user_email] == 'admin@dongqiudi.com'
+    session[:admin]
   end
 
   # Logs out the current user.

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
   get    'weibo'  => 'sessions#weibo'
-  get    'oauth' => 'sessions#oauth'
+  get    'github' => 'sessions#github'
 
   resources :users
   resources :topics
