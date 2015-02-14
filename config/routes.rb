@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get    'github' => 'sessions#github'
 
   resources :users
+  get 'signup' => 'users#new'
+  
   resources :topics
   resources :members
 
