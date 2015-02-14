@@ -6,7 +6,7 @@ class WechatController < ApplicationController
   end
 
   def create
-    if params[:xml][:MsgType] == "text"
+    if params[:MsgType] == "text"
       render "echo", :formats => :xml
     end
   end
