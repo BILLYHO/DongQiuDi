@@ -10,6 +10,8 @@ GEM
       activesupport (= 4.1.7)
       rack (~> 1.5.2)
       rack-test (~> 0.6.2)
+    actionpack-xml_parser (1.0.1)
+      actionpack (>= 4.0.0.rc1)
     actionview (4.1.7)
       activesupport (= 4.1.7)
       builder (~> 3.1)
@@ -250,6 +252,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  actionpack-xml_parser
   bcrypt (= 3.1.7)
   bootstrap-sass (= 3.2.0.0)
   bootstrap-will_paginate (= 0.0.10)
