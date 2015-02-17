@@ -9,6 +9,12 @@ class WechatController < ApplicationController
   def create
     if params[:xml][:MsgType] == "text"
       render "echo", :formats => :xml
+    elsif params[:xml][:MsgType] == "event"
+      case params[:xml][:EventKey]
+        when "news" then render "news", :formats => :xml
+        when "matchs" then render "matchs", :formats => :xml
+        when "rank" then render "rank", :formats => :xml
+      end
     end
   end
 end
