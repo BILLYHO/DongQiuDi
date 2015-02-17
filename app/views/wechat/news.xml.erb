@@ -2,6 +2,14 @@
     <ToUserName><![CDATA[<%= params[:xml][:FromUserName] %>]]></ToUserName>
     <FromUserName><![CDATA[<%= params[:xml][:ToUserName] %>]]></FromUserName>
     <CreateTime><%= Time.now.to_i %></CreateTime>
-    <MsgType><![CDATA[text]]></MsgType>
-    <Content><![CDATA[啥资讯都没]]></Content>
+    <MsgType><![CDATA[news]]></MsgType>
+    <ArticleCount>1</ArticleCount>
+    <Articles>
+    <item>
+        <Title><![CDATA[title1]]></Title>
+        <Description><![CDATA[description1]]></Description>
+        <PicUrl><![CDATA[http://7u2tjq.com1.z0.glb.clouddn.com/08001.jpg]]></PicUrl>
+        <Url><![CDATA[http://mp.weixin.qq.com/s?__biz=MzA3NDMzNTE3OQ==&mid=203221334&idx=1&sn=ce18894abbe6b85592d33e5b26f43f1f#rd]]></Url>
+    </item>
+    </Articles>
 </xml>
