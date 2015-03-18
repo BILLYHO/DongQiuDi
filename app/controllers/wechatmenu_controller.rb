@@ -9,7 +9,8 @@ class WechatmenuController < ApplicationController
     response = Net::HTTP.get_response(uri)
     result = JSON.parse(response.body)
     token = result['access_token']
-    flash[:success] = token
+    expire = result['expires_in']
+    flash[:success] = "token:#{token}, expires in:#{expire}"
 
     # button1 = {}
     # button1['type'] = 'click'
@@ -41,10 +42,12 @@ class WechatmenuController < ApplicationController
     # errcode = obj['errcode']
     # flash[:notice] = errcode
 
-    params = {'button' => [
-        { 'type' => 'click', 'name' => '资讯', 'key' => 'news'},
-        { 'type' => 'click', 'name' => '赛事', 'key' => 'matchs'},
-        { 'type' => 'click', 'name' => '排行榜', 'key' => 'rank'}
+    params = {
+        'access_token' => token,
+        'button' => [
+        { 'type' => 'click', 'name' => 'news', 'key' => 'news'},
+        { 'type' => 'click', 'name' => 'matchs', 'key' => 'matchs'},
+        { 'type' => 'click', 'name' => 'rank', 'key' => 'rank'}
     ]}
     json_headers = {"Content-Type" => "application/json",
                     "Accept" => "application/json"}
@@ -53,9 +56,11 @@ class WechatmenuController < ApplicationController
     https = Net::HTTP.new(uri.host, uri.port)
     https.use_ssl = true
     response = https.post(uri.path, params.to_json, json_headers)
+    #flash[:notice] = JSON.pretty_generate(params.to_json)
     obj = JSON.parse(response.body)
     errcode = obj['errcode']
-    flash[:notice] = errcode
+    errmsg = obj['errmsg']
+    flash[:notice] = "code: #{errcode}, message: #{errmsg}"
 
   end
 
