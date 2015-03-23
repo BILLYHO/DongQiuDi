@@ -24,6 +24,14 @@ module SessionsHelper
     @current_user = nil
   end
 
+  def logged_in_admin
+    unless is_admin?
+      flash[:danger] = "Not admin."
+      redirect_to root_url
+    end
+  end
+
+
   # Confirms a logged-in user.
   def logged_in_user
     unless logged_in?
